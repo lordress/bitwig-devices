@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "projectId": "ress.ress-amp",
+  "name": "Ress-Amp",
+  "surface": "device",
+  "target": {
+    "bitwigVersion": "6.1.7",
+    "platform": "macos-arm64"
+  },
+  "identity": {
+    "uuid": "8dd21e55-6502-4be5-ab1d-a7320f6df05b",
+    "creator": "Ressa",
+    "category": "Audio FX"
+  },
+  "presentation": {
+    "type": "audio-fx",
+    "description": "Neural amp player with four NAM captures baked in: input trim, noise gate, bass / mid / treble and output, with a live input/output meter display.",
+    "tags": "nam neural amp modeler guitar amp capture cabinet"
+  },
+  "sources": {
+    "nitro": [
+      "ress_amp.nitro"
+    ],
+    "sksl": [
+      "panel.sksl"
+    ]
+  },
+  "adapter": {
+    "type": "external-builder",
+    "argv": [
+      "python",
+      "{workspace}/build.py",
+      "--out",
+      "{output}"
+    ]
+  },
+  "output": {
+    "path": "build/macos-6.1.7/Ress-Amp.bwdevice",
+    "libraryPath": "Ress-Amp.bwdevice"
+  },
+  "preflight": {
+    "profile": "bitwig-6.1.3-hybrid",
+    "expectedNitroInputs": 12,
+    "expectedNitroOutputs": 2,
+    "maxDrawingVectors": 1,
+    "requiredAudioInputSourceClassId": 1371,
+    "requiredDelayCompensationInputSourceClassId": 154,
+    "requiredProxyInputCount": 2,
+    "requireSkiaCompiler": true,
+    "recallSafety": {
+      "canary": "runtime_magic",
+      "arrays": [
+        {
+          "name": "M0_H",
+          "initialization": "explicit-clear",
+          "requiredBeforeFirstAccess": [
+            "clearState()"
+          ]
+        },
+        {
+          "name": "M1_H",
+          "initialization": "explicit-clear",
+          "requiredBeforeFirstAccess": [
+            "clearState()"
+          ]
+        },
+        {
+          "name": "M2_H",
+          "initialization": "explicit-clear",
+          "requiredBeforeFirstAccess": [
+            "clearState()"
+          ]
+        },
+        {
+          "name": "M3_H",
+          "initialization": "explicit-clear",
+          "requiredBeforeFirstAccess": [
+            "clearState()"
+          ]
+        }
+      ]
+    },
+    "controlContract": {
+      "schema": 1,
+      "shaderRole": "non-interactive-display",
+      "controls": [
+        {
+          "parameter": "MODEL",
+          "widgetClass": 1712,
+          "drawOwners": [
+            "native"
+          ],
+          "inputOwner": "native",
+          "gestures": [
+            "select"
+          ],
+          "statesNormalized": [
+            0.0,
+            0.3333333333333333,
+            0.6666666666666666,
+            1.0
+          ],
+          "defaultNormalized": 0.0
+        },
+        {
+          "parameter": "INPUT",
+          "widgetClass": 1687,
+          "drawOwners": [
+            "native"
+          ],
+          "inputOwner": "native",
+          "knobSize": 1,
+          "gestures": [
+            "drag",
+            "reset"
+          ],
+          "defaultNormalized": 0.5
+        },
+        {
+          "parameter": "GATE",
+          "widgetClass": 1687,
+          "drawOwners": [
+            "native"
+          ],
+          "inputOwner": "native",
+          "knobSize": 1,
+          "gestures": [
+            "drag",
+            "reset"
+          ],
+          "defaultNormalized": 0.3333333333333333
+        },
+        {
+          "parameter": "BASS",
+          "widgetClass": 1687,
+          "drawOwners": [
+            "native"
+          ],
+          "inputOwner": "native",
+          "knobSize": 1,
+          "gestures": [
+            "drag",
+            "reset"
+          ],
+          "defaultNormalized": 0.6
+        },
+        {
+          "parameter": "MID",
+          "widgetClass": 1687,
+          "drawOwners": [
+            "native"
+          ],
+          "inputOwner": "native",
+          "knobSize": 1,
+          "gestures": [
+            "drag",
+            "reset"
+          ],
+          "defaultNormalized": 0.6
+        },
+        {
+          "parameter": "TREBLE",
+          "widgetClass": 1687,
+          "drawOwners": [
+            "native"
+          ],
+          "inputOwner": "native",
+          "knobSize": 1,
+          "gestures": [
+            "drag",
+            "reset"
+          ],
+          "defaultNormalized": 0.6
+        },
+        {
+          "parameter": "OUTPUT",
+          "widgetClass": 1687,
+          "drawOwners": [
+            "native"
+          ],
+          "inputOwner": "native",
+          "knobSize": 1,
+          "gestures": [
+            "drag",
+            "reset"
+          ],
+          "defaultNormalized": 0.6666666666666666
+        },
+        {
+          "parameter": "PRESENCE",
+          "widgetClass": 1687,
+          "drawOwners": [
+            "native"
+          ],
+          "inputOwner": "native",
+          "knobSize": 1,
+          "gestures": [
+            "drag",
+            "reset"
+          ],
+          "defaultNormalized": 0.5
+        },
+        {
+          "parameter": "DEPTH",
+          "widgetClass": 1687,
+          "drawOwners": [
+            "native"
+          ],
+          "inputOwner": "native",
+          "knobSize": 1,
+          "gestures": [
+            "drag",
+            "reset"
+          ],
+          "defaultNormalized": 0.5
+        },
+        {
+          "parameter": "GATE_ON",
+          "widgetClass": 1712,
+          "drawOwners": [
+            "native"
+          ],
+          "inputOwner": "native",
+          "gestures": [
+            "select"
+          ],
+          "statesNormalized": [
+            0.0,
+            1.0
+          ],
+          "defaultNormalized": 1.0
+        }
+      ]
+    }
+  }
+}

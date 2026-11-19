@@ -1,0 +1,5 @@
+device/build/
+device/ress_amp.nitro
+device/__pycache__/
+**/__pycache__/
+.DS_Store
