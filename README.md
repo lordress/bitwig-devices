@@ -1,3 +1,16 @@
+# Bitwig devices
+
+Native Bitwig devices, installed through Patchbay's **Framework: Nitro Devices**.
+
+| Device | What it is |
+| --- | --- |
+| [Ress-Amp](Bitwig-6.1.7/Ress-Amp.bwdevice) | four NAM captures compiled into one device |
+| [Ress-Reverb](Bitwig-6.1.7/Ress-Reverb.bwdevice) | reverb/delay with Valhalla Supermassive's control set and 20 modes |
+
+Everything below describes Ress-Amp.
+
+---
+
 # Ress-Amp
 
 A native Bitwig device that plays four NAM captures with no plug-in in the chain:
@@ -70,8 +83,8 @@ The device is generated, not hand-written:
 ```
 
 That runs `tools/nam4nitro.py` (bake the captures into Nitro), then
-`device/gen_project.py` (manifest), then `device/build.py` (compile and package),
-copies the result to `~/Documents/Bitwig Devices` and runs Bitwig's own
+`device/gen_project.py` (manifest), `device/gen_panel.py` (the panel shader,
+from the spec) and `device/build.py` (compile and package), copies the result to `~/Documents/Bitwig Devices` and runs Bitwig's own
 preflight.
 
 Building needs the Bitwig Device Blueprints devkit with compiler inputs taken
@@ -80,8 +93,11 @@ a sibling `ress-vocal/devkit`. The prebuilt `.bwdevice` needs none of that.
 
 ## Editing the panel
 
-See [EDITING.md](EDITING.md): coordinates live in `device/spec.py`, widgets in
-`device/document.py`, the drawn background in `device/panel.sksl`.
+See [EDITING.md](EDITING.md): the face — sections, meters, widgets and their
+coordinates — lives in `device/panel_spec.py`; custom drawing in
+`device/panel_body.sksl`; parameters in `device/spec.py`. `panel.sksl` is
+generated, and `../../ress-vocal/devkit/.venv/bin/python -m bwui preview device/panel_spec.py`
+shows the panel without building it.
 
 ## Licence
 

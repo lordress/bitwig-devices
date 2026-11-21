@@ -11,6 +11,7 @@ cd "$HERE"
 python3 tools/nam4nitro.py --out device/ress_amp.nitro
 cd device
 PYTHONPATH=. "$PY" gen_project.py
+PYTHONPATH=.:"$DEVKIT" "$PY" gen_panel.py
 PYTHONPATH=.:"$DEVKIT" "$PY" build.py --compiler-inputs "$INPUTS"
 cp "build/macos-6.1.7/Ress-Amp.bwdevice" "$DEST/"
 echo "installed to $DEST"

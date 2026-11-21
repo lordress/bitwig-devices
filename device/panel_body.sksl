@@ -1,0 +1,11 @@
+// Ress-Amp: the parts of the face the panel spec cannot describe.
+// Appended to the generated chrome, in the same design pixels (469 x 286).
+// audioLow = (input level, output level, gate open, model position)
+
+// The gate LED in the output well: lit while the gate is open.
+float r = length(p - float2(340.8, 40.0));
+color = mix(color, float3(0.24, 0.78, 0.62), clamp(audioLow.z, 0.0, 1.0) * step(r, 2.4));
+
+// A hairline between the two meter bars of each pair, so they read as one meter.
+color = mix(color, float3(0.043, 0.047, 0.055), inBox(p, float2(33.0, 10.0), float2(34.0, 189.1)));
+color = mix(color, float3(0.043, 0.047, 0.055), inBox(p, float2(339.0, 10.0), float2(340.0, 189.1)));

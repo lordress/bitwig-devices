@@ -9,8 +9,9 @@ import sys
 from tempfile import TemporaryDirectory
 
 HERE = Path(__file__).resolve().parent
+WS = HERE.parents[1]                                  # workspace root (holds bwui)
 ROOT = HERE.parent.parent / "ress-vocal" / "devkit"  # the shared device devkit
-sys.path[:0] = [str(ROOT), str(ROOT / "scripts"), str(HERE)]
+sys.path[:0] = [str(WS), str(ROOT), str(ROOT / "scripts"), str(HERE)]
 
 import compiler_profiles  # noqa: E402
 import project_contracts  # noqa: E402

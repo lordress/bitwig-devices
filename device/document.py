@@ -11,8 +11,9 @@ def grid_layout(x, y, w, h):
     """The mockup is drawn in fractions of a grid unit; the document stores i16."""
     return _grid_layout(int(round(x)), int(round(y)), int(round(w)), int(round(h)))
 
-from spec import (GATE_SWITCH, INDEXED, KNOB_Y, LABEL_Y, MODELS, OUT_KNOB, OUT_LABEL,
-                  PANEL_HEIGHT, PANEL_WIDTH, PARAMS, STRIP, SWITCH, TONE, TOGGLES)
+import bwui.emit as bwui_emit
+from panel_spec import PANEL
+from spec import INDEXED, MODELS, PANEL_HEIGHT, PANEL_WIDTH, PARAMS, TOGGLES
 
 KNOB_SIZE_MAIN = 1
 KNOB_SIZE_SMALL = 1
@@ -310,31 +311,10 @@ def document(project, binary, shader):
         "preset_identifier#701": v("String", "PANEL_DRAWING"), "#16316": v("WideString", shader),
     })
 
-    items = [obj(5517, "", {
-        "layout_settings#6226": v("Object", grid_layout(0, 0, PANEL_WIDTH, PANEL_HEIGHT)),
-        "is_visible#6309": v("Bool", True), "is_enabled#6310": v("Bool", True),
-        "tooltip_text#6867": v("String", ""), "help_id#10543": v("String", ""),
-        "help_location#10546": v("Byte", 0), "data_model#6220": ref(drawing),
-    })]
-
-    items.append(button_group(ref(params["model"]), SWITCH[0], SWITCH[1], SWITCH[2], SWITCH[3],
-                              "Amp capture: DZL V4, FNDR BFSR, 5150 TS9, VX TB30"))
-
-    for key, x, y in TONE:
-        items.append(knob(ref(params[key]), x, y, 6.4, 6.4, "", KNOB_SIZE_MAIN))
-        items.append(label(PARAMS_BY_KEY[key][1], x - 0.8, y + 6.6, 8, 2.6))
-
-    for key, x in STRIP:
-        items.append(knob(ref(params[key]), x, KNOB_Y, 6.4, 6.4, "", KNOB_SIZE_MAIN))
-        items.append(label(PARAMS_BY_KEY[key][1], x, LABEL_Y, 8, 2.6))
-
-    items.append(button_group(ref(gate_atom), GATE_SWITCH[0], GATE_SWITCH[1],
-                              GATE_SWITCH[2], GATE_SWITCH[3], "Noise gate on or off", 0))
-
-    items.append(knob(ref(params["output"]), OUT_KNOB[0], OUT_KNOB[1], OUT_KNOB[2], OUT_KNOB[3],
-                      "", KNOB_SIZE_MAIN))
-    items.append(label("Out", OUT_LABEL[0], OUT_LABEL[1], 8, 2.6))
-
+    # The face of the device is described once, in panel_spec.py; this binds its
+    # widgets to the atoms built above.
+    items = bwui_emit.items(PANEL, lambda key: ref(params[key]),
+                            display=lambda: ref(drawing))
     output_proxy = proxy(output=True)
     output_proxy["fields"]["settings#6194"] = settings([wire(dsp, 0)])
     panel = main_panel(items)
