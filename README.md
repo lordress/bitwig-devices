@@ -5,7 +5,6 @@ Native Bitwig devices, installed through Patchbay's **Framework: Nitro Devices**
 | Device | What it is |
 | --- | --- |
 | [Ress-Amp](Bitwig-6.1.7/Ress-Amp.bwdevice) | four NAM captures compiled into one device |
-| [Ress-Reverb](Bitwig-6.1.7/Ress-Reverb.bwdevice) | reverb/delay with Valhalla Supermassive's control set and 20 modes |
 
 Everything below describes Ress-Amp.
 
